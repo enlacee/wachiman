@@ -1,0 +1,22 @@
+{
+  "name": "Wachiman",
+  "homepage": "https://github.com/enlacee/wachiman",
+  "authors": [
+    "Anibal C <detops.tk@gmail.com>"
+  ],
+  "description": "seguridad en san isidro",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
