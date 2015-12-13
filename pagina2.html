@@ -41,10 +41,6 @@
 			    height: 50px;
 			}
 		</style>
-
-		<script type="text/javascript">
-        var context = { "name" : "Wachiman", "url" : "http://localhost/acopitan/wachiman" }
-        </script>
 	</head>
     <body>
 		<div class="wrapper">
@@ -67,24 +63,24 @@
 
 				<!-- body -->
 				<div class="row app-body debug ">
-				<form id="reportar" action="" method="get">
+				<form id="reportar" action="/api/items" method="post" onsubmit="return validacion()">
 
 				<div class="col-md-12">
+					<!--
 					<div class="row margin-bottom-60">
 
 						<div class="col-md-12">
-						<!--<form>-->
 							<br/>
 							<div class="input-group double-input-azul">
 								<span class="input-group-addon input-blue-head" id="input-ubicacion">
 									<div class="input-ubicacion-data">Ubicación</div></span>
 								<input type="text" name="localizacion" class="form-control input-blue-body" readonly>
 							</div>
-							<input type="text" name="latitud" value="" />
-							<input type="text" name="longitud" value="" />
-						<!--</form>-->
+							<input type="hidden" name="latitud" id="latitud" value="" />
+							<input type="hidden" name="longitud" id="longitud" value="" />
 						</div>
 					</div>
+					-->
 
 					<div class="row margin-bottom-50">
 						<div class="col-md-12">
@@ -166,19 +162,13 @@
 
 		<!-- libs -->
 		<script charset="utf-8" type="text/javascript" src="assets/lib/jquery/dist/jquery.js"></script>
-		<script type="text/javascript" src="assets/js/js2.js"></script>
-		<script charset="utf-8">
+		<script charset="utf-8" type="text/javascript" src="assets/js/jquery.url.js"></script>
+		<script charset="utf-8" type="text/javascript">
 
-		$(document).ready(function(){
+		$(document).ready(function() {
 
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function(position) {
-
-				var pos = {
-					lat: position.coords.latitude ,
-					lng: position.coords.longitude
-				}
-			}
+			$('#latitud').val($.urlParam('latitud'));
+			$('#longitud').val($.urlParam('longitud'));
 
 		});
 

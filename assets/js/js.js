@@ -197,6 +197,9 @@ function initMap() {
         lng: position.coords.longitude
       };
 
+	// setear posicion
+	$('#longitud').val(pos.lat);
+	$('#latitud').val(pos.lng);
 
 	 // NOW CREATE THE ACTUAL MARKER ON THE MAP
 	 var marker = new google.maps.Marker({
