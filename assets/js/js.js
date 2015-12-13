@@ -255,17 +255,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 //google.maps.event.addDomListener(window, 'resize', initMap);
 //google.maps.event.addDomListener(window, 'load', initMap)
 
-function getMaxValue() {
-	var theAPI = context.url + '/api/data-reporte.json';
-	$.getJSON( theAPI, function( data ) {
-		console.log('data', data);
-	});
-}
-
 // Init App
 window.onload = function(){
+	$.getJSON( theAPI, function( data ) {
+		var reporte = data;
+		console.log('reporte', reporte);
 
-	// init app
-	initMap();
-	getMaxValue();
+		// init app
+		initMap();
+	});
 };
