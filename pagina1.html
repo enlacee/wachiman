@@ -48,11 +48,165 @@
 			</div>
 		</div>
 
+		<!-- map -->
+		<div id="map">
+
+		</div>
+		<!--<iframe id="map" src="" width="100%" height="100%"></iframe>-->
+
 
 		<!-- libs -->
-		<script charset="utf-8" type="text/javascript" src="../public/lib/jquery/dist/jquery.js"></script>
-		<script>
-			console.log("hi!")
-		</script>
+		<!--<script charset="utf-8" type="text/javascript" src="assets/lib/jquery/dist/jquery.js"></script>-->
+    <script>
+
+function initMap() {
+	var options =  {center: {lat: -12.097524, lng: -77.02725},
+		zoom: 15,
+		scrollwheel:true,
+  		draggable: true
+	};
+
+	if (window.screen.availWidth <= 500) {
+		options.zoom = 17;
+	}
+	console.log('window.screen.availWidth', window.screen.availWidth);
+	console.log('options', options);
+
+  var map = new google.maps.Map(document.getElementById('map'), options);
+  var infoWindow = new google.maps.InfoWindow();
+  var pos;
+
+  var sector41 = [
+      {lat:-12.090667, lng:  -77.033514},
+      {lat: -12.091381, lng: -77.030146},
+      {lat:-12.091947, lng:  -77.030210},
+      {lat: -12.092514, lng: -77.030307},
+      {lat:-12.092283, lng:  -77.029373},
+      {lat: -12.096537, lng: -77.028783},
+      {lat:-12.097129, lng: -77.032613}
+  ];
+
+  var sector41a = new google.maps.Polygon({
+    paths: sector41,
+    strokeColor: '#000000',
+    strokeOpacity: 0.4,
+    strokeWeight: 3,
+    fillColor: '#FF0000',
+    fillOpacity: 0.2
+  });
+
+  var sector42 = [
+      {lat: -12.091947, lng: -77.030210},
+      {lat: -12.092514, lng: -77.030307},
+      {lat: -12.092283, lng:   -77.029373},
+      {lat: -12.096537, lng: -77.028783},
+      {lat: -12.098294, lng:   -77.028526},
+      {lat: -12.098189, lng: -77.027345},
+      {lat: -12.098787, lng:   -77.026058},
+     {lat: -12.091958, lng: -77.022528},
+      {lat: -12.090772, lng: -77.022753}
+  ];
+
+  var sector42a = new google.maps.Polygon({
+    paths: sector42,
+    strokeColor: '#000000',
+    strokeOpacity: 0.4,
+    strokeWeight: 3,
+    fillColor: '#ecd73a',
+    fillOpacity: 0.2
+  });
+
+  var sector43 = [
+      {lat:  -12.097129 , lng: -77.032613},
+      {lat: -12.096537, lng: -77.028783},
+      {lat:  -12.098294 , lng: -77.028526},
+      {lat: -12.098189, lng: -77.027345},
+      {lat:  -12.098787 , lng: -77.026058},
+      {lat: -12.102857, lng: -77.027227},
+      {lat: -12.103602, lng: -77.031594}
+  ];
+
+  var sector43a = new google.maps.Polygon({
+    paths: sector43,
+    strokeColor: '#000000',
+    strokeOpacity: 0.4,
+    strokeWeight: 3,
+    fillColor: '#1813ed',
+    fillOpacity: 0.2
+  });
+
+  var sector44 = [
+      {lat:  -12.091958 , lng: -77.022528},
+      {lat: -12.101976, lng: -77.018676},
+      {lat: -12.102857, lng: -77.027227},
+      {lat: -12.098787, lng: -77.026058}
+  ];
+
+  var sector44a = new google.maps.Polygon({
+    paths: sector44,
+    strokeColor: '#000000',
+    strokeOpacity: 0.4,
+    strokeWeight: 3,
+    fillColor: '#008000',
+    fillOpacity: 0.2
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      pos = {
+        lat: position.coords.latitude ,
+        lng: position.coords.longitude
+      };
+
+	 var marker = new google.maps.Marker({
+	    position: pos,
+	    title: 'Mi posición'
+	  });
+
+    marker.setMap(map);
+    map.setCenter(pos);
+
+  marker.addListener('click', function(e) {
+    var contenido =
+        google.maps.geometry.poly.containsLocation(e.latLng, sector41a) ?
+        'Dentro de sector 4-1' :
+        google.maps.geometry.poly.containsLocation(e.latLng, sector42a) ?
+        'Dentro de sector 4-2' :
+        google.maps.geometry.poly.containsLocation(e.latLng, sector43a) ?
+        'Dentro de sector 4-3' :
+        google.maps.geometry.poly.containsLocation(e.latLng, sector44a) ?
+        'Dentro de sector 4-4' :
+        'Fuera';;;;
+
+    var infowindow = new google.maps.InfoWindow({
+    content: contenido });
+
+    infowindow.open(map, marker);
+  });
+
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+
+  sector41a.setMap(map);
+  sector42a.setMap(map);
+  sector43a.setMap(map);
+  sector44a.setMap(map);
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
+
+    </script>
+	    </script>
+	    <script async defer
+	        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD4K_DGERpoDTBv_j_ALHVg6jrzQ2l1DE&signed_in=false&callback=initMap"></script>
 	</body>
 </html>
