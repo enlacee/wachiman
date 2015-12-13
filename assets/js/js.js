@@ -256,7 +256,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 //google.maps.event.addDomListener(window, 'load', initMap)
 
 // Init App
-window.onload = function(){
+window.onload = function() {
+	var theAPI = context.url + '/api/data-reporte.json';
 	$.getJSON( theAPI, function( data ) {
 		var reporte = data;
 		console.log('reporte', reporte);
