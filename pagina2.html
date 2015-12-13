@@ -33,12 +33,16 @@
 				color:white;
 			}
 
-			.row.margin-bottom-50.botones-check .col-md-4 {
+			.col-md-4 {
 			    text-align: center;
 			}
 
 			input.form-control.input-blue-body {
 			    height: 50px;
+			}
+			.error {
+				font-size:19px;
+				color:red;
 			}
 		</style>
 	</head>
@@ -76,13 +80,13 @@
 									<div class="input-ubicacion-data">Ubicación</div></span>
 								<input type="text" name="localizacion" class="form-control input-blue-body" readonly>
 							</div>
-							<input type="hidden" name="latitud" id="latitud" value="" />
-							<input type="hidden" name="longitud" id="longitud" value="" />
 						</div>
 					</div>
 					-->
 
-					<div class="row margin-bottom-50">
+					<input type="hidden" name="latitud" id="latitud" value="" />
+					<input type="hidden" name="longitud" id="longitud" value="" />
+					<div class="row margin-bottom-30">
 						<div class="col-md-12">
 							<div class="input-group sub-header-blue">
 								<div class="text-center">
@@ -92,31 +96,31 @@
 						</div>
 					</div>
 
-					<div class="row margin-bottom-50 botones-check">
+					<div class="row margin-bottom-30 botones-check">
 						<div class="col-md-4 col-xs-4">
 							<label>
 								<!--<input type="checkbox" name="checkbox" value="value">-->
-								<input type="radio" name="incidente" value="robo-persona">
+								<input type="radio" name="incidente" id="incidente" value="robo-persona">
 								<img src="assets/images/incidentes/icon_robo_personas.png"/>
 							</label>
 						</div>
 						<div class="col-md-4 col-xs-4">
 							<label>
 								<!--<input type="checkbox" name="checkbox" value="value">-->
-								<input type="radio" name="incidente" value="robo-casa">
+								<input type="radio" name="incidente" id="incidente" value="robo-casa">
 								<img src="assets/images/incidentes/icon_robo_casa.png"/>
 							</label>
 						</div>
 						<div class="col-md-4 col-xs-4">
 							<label>
 								<!--<input type="checkbox" name="checkbox" value="value">-->
-								<input type="radio" name="incidente" value="robo-auto">
+								<input type="radio" name="incidente" id="incidente" value="robo-auto">
 								<img src="assets/images/incidentes/icon_robo_auto.png"/>
 							</label>
 						</div>
 					</div>
 
-					<div class="row margin-bottom-50">
+					<div class="row margin-bottom-30">
 						<div class="col-md-12">
 							<div class="input-group sub-header-blue">
 								<div class="text-center">
@@ -129,7 +133,7 @@
 
 					<div class="row margin-bottom-50">
 						<div class="col-md-12">
-							<textarea class="form-control" name="descripcion" rows="8" cols="40"></textarea>
+							<textarea class="form-control" name="descripcion" id="descripcion" rows="8" cols="40"></textarea>
 						</div>
 					</div>
 
@@ -171,6 +175,30 @@
 			$('#longitud').val($.urlParam('longitud'));
 
 		});
+
+		/**
+		*/
+		function validacion() {
+
+			var incidente = $('#incidente');
+			var descripcion = $('#descripcion');
+			console.log(incidente.prop('checked') )
+
+			if($('input[name=incidente]:checked').length <= 0) {
+				$(".error").html('');
+				incidente.parent().append("<div class='error'>Seleccione un tipo de Incidente</div>");
+				return false;
+			} else {
+				$(".error").html('');
+			}
+
+			if (descripcion.val() == null || descripcion.val() == '') {
+				//alert("descripcion vacio");
+				//return false;
+			}
+
+			return true;
+		}
 
 
 		</script>
